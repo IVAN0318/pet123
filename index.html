@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>寵物貓健康狀況評估問卷</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>寵物貓健康狀況評估問卷</h1>
+        
+        <!-- 進度條和頁面指示器將在這裡插入 -->
+        
+        <div class="form-container">
+            <form id="catHealthForm">
+                <!-- 基本資料 -->
+                <section class="form-section form-page" id="page1">
+                    <h2>基本資料</h2>
+                    <div class="form-group">
+                        <label for="catName">貓咪名稱:</label>
+                        <input type="text" id="catName" name="catName" required class="short-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="catAge">年齡 (歲):</label>
+                        <input type="number" id="catAge" name="catAge" min="0" required class="short-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="catGender">性別:</label>
+                        <select id="catGender" name="catGender" required class="short-input">
+                            <option value="male">公貓</option>
+                            <option value="female">母貓</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="catWeight">體重 (kg):</label>
+                        <input type="number" id="catWeight" name="catWeight" step="0.1" min="0" required class="short-input">
+                    </div>
+                    <button type="button" class="next-btn">下一頁</button>
+                </section>
+
+                <!-- 飲食與營養 -->
+                <section class="form-section form-page" id="page2">
+                    <h2>一、飲食與營養</h2>
+                    <div class="question">
+                        <p>貓咪的主要飲食是什麼？</p>
+                        <select name="diet" required>
+                            <option value="-2">全乾糧</option>
+                            <option value="0">乾糧和濕糧混合</option>
+                            <option value="3">手作鮮食或生食</option>
+                            <option value="2">特殊處方飼料</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>貓咪每日的飲水量如何？</p>
+                        <select name="water" required>
+                            <option value="-2">很少喝水</option>
+                            <option value="0">偶爾喝水</option>
+                            <option value="2">經常喝水或使用流動水飲水機</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>是否給予營養補充品（如益生菌、維生素等）？</p>
+                        <select name="supplements" required>
+                            <option value="-2">沒有</option>
+                            <option value="0">偶爾</option>
+                            <option value="2">定期補充</option>
+                        </select>
+                    </div>
+                    <button type="button" class="prev-btn">上一頁</button>
+                    <button type="button" class="next-btn">下一頁</button>
+                </section>
+
+                <!-- 毛髮與皮膚狀況 -->
+                <section class="form-section form-page" id="page3">
+                    <h2>二、毛髮與皮膚狀況</h2>
+                    <div class="question">
+                        <p>貓咪的毛髮質量如何？</p>
+                        <select name="furQuality" required>
+                            <option value="-3">暗淡、毛髮稀疏</option>
+                            <option value="0">毛髮光澤一般</option>
+                            <option value="3">毛髮光澤明亮，沒有掉毛問題</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>貓咪是否經常抓撓或舔毛？</p>
+                        <select name="skinProblem" required>
+                            <option value="-2">是，有皮膚問題</option>
+                            <option value="0">偶爾</option>
+                            <option value="2">沒有這類問題</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>是否有皮膚或毛髮的疾病史？</p>
+                        <select name="skinHistory" required>
+                            <option value="-2">有過敏、皮炎或其他皮膚病</option>
+                            <option value="0">偶爾有小問題</option>
+                            <option value="2">沒有皮膚疾病</option>
+                        </select>
+                    </div>
+                    <button type="button" class="prev-btn">上一頁</button>
+                    <button type="button" class="next-btn">下一頁</button>
+                </section>
+
+                <!-- 腎臟健康 -->
+                <section class="form-section form-page" id="page4">
+                    <h2>三、腎臟健康</h2>
+                    <div class="question">
+                        <p>貓咪的尿液顏色和頻率如何？</p>
+                        <select name="urineCondition" required>
+                            <option value="-3">深色，且排尿次數減少</option>
+                            <option value="0">顏色正常，排尿頻率一般</option>
+                            <option value="2">淺色且經常排尿</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>貓咪是否有過腎臟問題或診斷？</p>
+                        <select name="kidneyProblem" required>
+                            <option value="-5">是，曾被診斷腎病</option>
+                            <option value="-2">沒有，但經常有尿液異常</option>
+                            <option value="3">沒有問題</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>是否給予特定的腎臟保健產品？</p>
+                        <select name="kidneySupplements" required>
+                            <option value="0">沒有</option>
+                            <option value="1">偶爾</option>
+                            <option value="3">經常或按照醫生建議</option>
+                        </select>
+                    </div>
+                    <button type="button" class="prev-btn">上一頁</button>
+                    <button type="button" class="next-btn">下一頁</button>
+                </section>
+
+                <!-- 情緒與行為 -->
+                <section class="form-section form-page" id="page5">
+                    <h2>四、情緒與行為</h2>
+                    <div class="question">
+                        <p>貓咪的活動量如何？</p>
+                        <select name="activityLevel" required>
+                            <option value="-3">很少運動，經常躺著</option>
+                            <option value="0">偶爾活動，但不頻繁</option>
+                            <option value="3">經常活動，充滿活力</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>貓咪是否容易緊張或焦慮？</p>
+                        <select name="anxiety" required>
+                            <option value="-2">是，經常出現焦慮情緒</option>
+                            <option value="0">偶爾</option>
+                            <option value="2">很少或沒有</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>貓咪的社交行為如何？</p>
+                        <select name="socialBehavior" required>
+                            <option value="-2">害羞且不喜歡互動</option>
+                            <option value="0">偶爾互動</option>
+                            <option value="2">喜歡與人或其他動物互動</option>
+                        </select>
+                    </div>
+                    <button type="button" class="prev-btn">上一頁</button>
+                    <button type="button" class="next-btn">下一頁</button>
+                </section>
+
+                <!-- 牙齒與口腔健康 -->
+                <section class="form-section form-page" id="page6">
+                    <h2>五、牙齒與口腔健康</h2>
+                    <div class="question">
+                        <p>貓咪是否有口腔疾病（如牙周病、口臭）？</p>
+                        <select name="oralHealth" required>
+                            <option value="-3">是，嚴重口腔問題</option>
+                            <option value="0">偶爾有輕微問題</option>
+                            <option value="2">沒有問題</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>是否有定期清潔牙齒或使用口腔保健品？</p>
+                        <select name="dentalCare" required>
+                            <option value="-2">沒有</option>
+                            <option value="0">偶爾</option>
+                            <option value="2">定期清潔或使用產品</option>
+                        </select>
+                    </div>
+                    <button type="button" class="prev-btn">上一頁</button>
+                    <button type="button" class="next-btn">下一頁</button>
+                </section>
+
+                <!-- 消化與排泄 -->
+                <section class="form-section form-page" id="page7">
+                    <h2>六、消化與排泄</h2>
+                    <div class="question">
+                        <p>貓咪的排便狀況如何？</p>
+                        <select name="bowelMovement" required>
+                            <option value="-3">經常腹瀉或便秘</option>
+                            <option value="0">偶爾出現異常</option>
+                            <option value="3">正常，糞便成型且頻率穩定</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>是否有消化問題的病史（如腸胃炎）？</p>
+                        <select name="digestiveHistory" required>
+                            <option value="-2">是，經常有問題</option>
+                            <option value="0">偶爾有小問題</option>
+                            <option value="2">沒有病史</option>
+                        </select>
+                    </div>
+                    <button type="button" class="prev-btn">上一頁</button>
+                    <button type="button" class="next-btn">下一頁</button>
+                </section>
+
+                <!-- 貓咪的壽命與健康史 -->
+                <section class="form-section form-page" id="page8">
+                    <h2>七、貓咪的壽命與健康史</h2>
+                    <div class="question">
+                        <p>貓咪的壽命預期與健康歷史是否有特別關注？</p>
+                        <select name="healthHistory" required>
+                            <option value="-5">曾有嚴重疾病或器官損傷</option>
+                            <option value="-2">偶爾有健康問題，但已治癒</option>
+                            <option value="3">一直很健康，沒有嚴重疾病</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <p>是否進行過遺傳測試或其他健康檢測？</p>
+                        <select name="healthChecks" required>
+                            <option value="0">沒有</option>
+                            <option value="1">進行過一次</option>
+                            <option value="3">定期進行</option>
+                        </select>
+                    </div>
+                <button type="submit" id="submitBtn">提交評估</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

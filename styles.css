@@ -1,0 +1,3716 @@
+:root {
+    --primary-color: #EE7300;
+    --primary-light: #FFA64D;
+    --primary-dark: #B85700;
+    --secondary-color: #4A90E2;
+    --background-color: #FFF5E6;
+    --text-color: #333333;
+    --input-background: #ffffff;
+    --input-border: #FFB366;
+    --input-focus: #EE7300;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+#page1 .form-group input,
+#page1 .form-group select {
+    width: 60%; /* 縮小欄位寬度 */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid var(--input-border);
+    border-radius: 25px; /* 圓滑邊角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+#page1 .form-group input:focus,
+#page1 .form-group select:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 全局樣式，適用於所有表單選項 */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid var(--input-border);
+    border-radius: 25px; /* 圓滑邊角 */
+    font-size: 1rem;
+:root {
+    --primary-color: #EE7300;
+    --primary-light: #FFA64D;
+    --primary-dark: #B85700;
+    --secondary-color: #4A90E2;
+    --background-color: #FFF5E6;
+    --text-color: #333333;
+    --input-background: #ffffff;
+    --input-border: #FFB366;
+    --input-focus: #EE7300;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+#page1 .form-group input,
+#page1 .form-group select {
+    width: 60%; /* 縮小欄位寬度 */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid var(--input-border);
+    border-radius: 8px; /* 圓滑邊角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+#page1 .form-group input:focus,
+#page1 .form-group select:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 確保在小屏幕上仍然是全寬的 */
+@media screen and (max-width: 600px) {
+    .half-width-input {
+        width: 100%;
+    }
+
+    #page1 .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #page1 .form-group label {
+        width: 100%;
+:root {
+    --primary-color: #EE7300;
+    --primary-light: #FFA64D;
+    --primary-dark: #B85700;
+    --secondary-color: #4A90E2;
+    --background-color: #FFF5E6;
+    --text-color: #333333;
+    --input-background: #ffffff;
+    --input-border: #FFB366;
+    --input-focus: #EE7300;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+/* 確保在小屏幕上仍然是全寬的 */
+@media screen and (max-width: 600px) {
+    .half-width-input {
+        width: 100%;
+    }
+
+    #page1 .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #page1 .form-group label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 0.3rem;
+    }
+}
+
+.short-input {
+    width: 60%;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid var(--primary-light);
+    border-radius: 25px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    box-shadow: 0 2px 10px rgba(238, 115, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text-color);
+}
+
+.short-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(238, 115, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+#page1 .form-group {
+    display: flex;
+:root {
+    --primary-color: #EE7300;
+    --primary-light: #FFA64D;
+    --primary-dark: #B85700;
+    --secondary-color: #4A90E2;
+    --background-color: #FFF5E6;
+    --text-color: #333333;
+    --input-background: #ffffff;
+    --input-border: #FFB366;
+    --input-focus: #EE7300;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+/* 確保在小屏幕上仍然是全寬的 */
+@media screen and (max-width: 600px) {
+    .half-width-input {
+        width: 100%;
+    }
+
+    #page1 .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #page1 .form-group label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 0.3rem;
+    }
+}
+
+.short-input {
+    width: 60%;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid var(--primary-light);
+    border-radius: 25px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    box-shadow: 0 2px 10px rgba(238, 115, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text-color);
+}
+
+.short-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(238, 115, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+#page1 .form-group {
+    display: flex;
+:root {
+    --primary-color: #EE7300;
+    --primary-light: #FFA64D;
+    --primary-dark: #B85700;
+    --secondary-color: #4A90E2;
+    --background-color: #FFF5E6;
+    --text-color: #333333;
+    --input-background: #ffffff;
+    --input-border: #FFB366;
+    --input-focus: #EE7300;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+/* 確保在小屏幕上仍然是全寬的 */
+@media screen and (max-width: 600px) {
+    .half-width-input {
+        width: 100%;
+    }
+
+    #page1 .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #page1 .form-group label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 0.3rem;
+    }
+}
+
+.short-input {
+    width: 60%;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid var(--primary-light);
+    border-radius: 25px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    box-shadow: 0 2px 10px rgba(238, 115, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text-color);
+}
+
+.short-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(238, 115, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+#page1 .form-group {
+    display: flex;
+:root {
+    --primary-color: #EE7300;
+    --primary-light: #FFA64D;
+    --primary-dark: #B85700;
+    --secondary-color: #4A90E2;
+    --background-color: #FFF5E6;
+    --text-color: #333333;
+    --input-background: #ffffff;
+    --input-border: #FFB366;
+    --input-focus: #EE7300;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+/* 確保在小屏幕上仍然是全寬的 */
+@media screen and (max-width: 600px) {
+    .half-width-input {
+        width: 100%;
+    }
+
+    #page1 .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #page1 .form-group label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 0.3rem;
+    }
+}
+
+.short-input {
+    width: 60%;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text-color);
+}
+
+.short-input:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    transform: translateY(-2px);
+}
+
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+:root {
+    --primary-color: #3498db;
+    --primary-light: #5dade2;
+    --primary-dark: #2980b9;
+    --secondary-color: #e67e22;
+    --background-color: #ecf0f1;
+    --text-color: #34495e;
+    --input-background: #ffffff;
+    --input-border: #bdc3c7;
+    --input-focus: #3498db;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+/* 確保在小屏幕上仍然是全寬的 */
+@media screen and (max-width: 600px) {
+    .half-width-input {
+        width: 100%;
+    }
+
+    #page1 .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #page1 .form-group label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 0.3rem;
+    }
+}
+
+.short-input {
+    width: 60%;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text-color);
+}
+
+.short-input:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    transform: translateY(-2px);
+}
+
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+:root {
+    --primary-color: #EE7300;
+    --primary-light: #FFA64D;
+    --primary-dark: #B85700;
+    --secondary-color: #4A90E2;
+    --background-color: #FFF5E6;
+    --text-color: #333333;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(238, 115, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #3498db;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-light);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section:hover {
+    box-shadow: 0 8px 20px rgba(238, 115, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.full-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    /* 移除 max-width: 300px; */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+#scoreChart, #categoryChart {
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.question {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    box-shadow: 0 6px 8px rgba(238, 115, 0, 0.2);
+}
+
+.question p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* 在現有樣式的基礎上添加或修改 */
+.form-page {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prev-btn, .next-btn, #submitBtn {
+    display: inline-block;
+    width: auto;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 115, 0, 0.3);
+    font-weight: 600;
+}
+
+.prev-btn:hover, .next-btn:hover, #submitBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 115, 0, 0.4);
+}
+
+.prev-btn {
+    margin-right: 1rem;
+}
+
+/* 添加進度條樣式 */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #ecf0f1;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+/* 添加頁面指示器樣式 */
+.page-indicator {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 保留原有的樣式 */
+
+/* 添加以下響應式設計規則 */
+
+/* 基本響應式設計 */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 平板設備 */
+@media screen and (max-width: 768px) {
+    .form-section {
+        padding: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    #catHealthForm {
+        max-width: 100%;
+    }
+
+    .logo-container {
+        position: static;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+}
+
+/* 手機設備 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section {
+        padding: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 0.8rem;
+    }
+
+    .prev-btn, .next-btn, #submitBtn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .question p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 確保圖表在小屏幕上也能正常顯示 */
+@media screen and (max-width: 600px) {
+    #scoreChart, #categoryPieChart, #categoryBarChart {
+        height: 300px !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 添加以下樣式以顯示錯誤提示 */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* 在文件末尾添加以下樣式 */
+
+.results-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary, .category-scores, .recommendations {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.score-chart-container, .chart-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommendations ul {
+    padding-left: 1.5rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 添加這個新的類別 */
+.half-width-input {
+    width: 40%; /* 將寬度從 50% 縮小到 40% */
+    padding: 0.5rem; /* 減小內邊距 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 稍微減小圓角 */
+    font-size: 0.9rem; /* 稍微減小字體大小 */
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.half-width-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 115, 0, 0.2);
+}
+
+/* 修改這個選擇器，使其只應用於非基本資料部分 */
+.question select {
+    width: 100%;
+}
+
+/* 為基本資料部分的表單組添加新的樣式 */
+#page1 .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* 改為 flex-start 以左對齊 */
+    margin-bottom: 0.8rem; /* 減小表單組之間的間距 */
+}
+
+#page1 .form-group label {
+    width: 25%; /* 減少標籤寬度 */
+    text-align: left; /* 將標籤文字左對齊 */
+    padding-right: 0.8rem;
+    font-size: 0.9rem; /* 稍微減小標籤字體大小 */
+}
+
+/* 確保在小屏幕上仍然是全寬的 */
+@media screen and (max-width: 600px) {
+    .half-width-input {
+        width: 100%;
+    }
+
+    #page1 .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #page1 .form-group label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 0.3rem;
+    }
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>貓咪健康評估結果</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container results-container">
+        <h1>貓咪健康評估結果</h1>
+        <div class="cat-info">
+            <h2>{{ survey.cat_name }} 的健康報告</h2>
+            <p>年齡: {{ survey.cat_age }} 歲 | 性別: {{ survey.cat_gender }} | 體重: {{ survey.cat_weight }} kg</p>
+            <p>評估日期: {{ survey.date_submitted.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        </div>
+        
+        <div class="score-summary">
+            <h3>總體健康評分</h3>
+            <div class="score-chart-container">
+                <canvas id="scoreChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="category-scores">
+            <h3>各項健康指標</h3>
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="recommendations">
+            <h3>健康建議</h3>
+            <ul id="recommendationList"></ul>
+        </div>
+        
+        <a href="/" class="btn-primary">返回首頁</a>
+    </div>
+
+    <script>
+        // 總分圖表
+        const scoreCtx = document.getElementById('scoreChart').getContext('2d');
+        new Chart(scoreCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['得分', '剩餘'],
+                datasets: [{
+                    data: [{{ survey.total_score }}, 100 - {{ survey.total_score }}],
+                    backgroundColor: ['#4CAF50', '#E0E0E0']
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '80%',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `總分: ${context.raw}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 分類得分圖表
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(categoryCtx, {
+            type: 'radar',
+            data: {
+                labels: ['飲食與營養', '毛髮與皮膚', '腎臟健康', '情緒與行為', '牙齒與口腔', '消化與排泄', '壽命與健康史'],
+                datasets: [{
+                    label: '分類得分',
+                    data: [
+                        {{ survey.diet_score }},
+                        {{ survey.skin_score }},
+                        {{ survey.kidney_score }},
+                        {{ survey.behavior_score }},
+                        {{ survey.dental_score }},
+                        {{ survey.digestion_score }},
+                        {{ survey.history_score }}
+                    ],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: false
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 10
+                    }
+                }
+            }
+        });
+
+        // 生成建議
+        const recommendationList = document.getElementById('recommendationList');
+        const recommendations = [
+            { score: {{ survey.diet_score }}, category: '飲食與營養', advice: '確保均衡飲食，提供足夠的水分。' },
+            { score: {{ survey.skin_score }}, category: '毛髮與皮膚', advice: '定期梳理毛髮，注意皮膚健康。' },
+            { score: {{ survey.kidney_score }}, category: '腎臟健康', advice: '監控飲水量，定期檢查腎臟功能。' },
+            { score: {{ survey.behavior_score }}, category: '情緒與行為', advice: '提供豐富的環境刺激，保持規律的互動。' },
+            { score: {{ survey.dental_score }}, category: '牙齒與口腔', advice: '定期檢查口腔，考慮使用潔齒產品。' },
+            { score: {{ survey.digestion_score }}, category: '消化與排泄', advice: '觀察排便情況，提供適當的纖維。' },
+            { score: {{ survey.history_score }}, category: '壽命與健康史', advice: '定期體檢，保持良好的生活習慣。' }
+        ];
+
+        recommendations.forEach(rec => {
+            if (rec.score < 7) {
+                const li = document.createElement('li');
+                li.textContent = `${rec.category}：${rec.advice}`;
+                recommendationList.appendChild(li);
+            }
+        });
+    </script>
+</body>
+</html>
